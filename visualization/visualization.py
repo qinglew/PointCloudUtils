@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from mpl_toolkits.mplot3d import Axes3D
 
-from shapenet_part_loader import PartDataset
+from dataloaders.shapenet_part_loader import PartDataset
 
 
 def show_point_cloud_part(point_cloud, seg, axis=False):
