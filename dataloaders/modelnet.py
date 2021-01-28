@@ -37,6 +37,13 @@ class ModelNet40v1(data.Dataset):
     see the file 'modelnet40category2id.txt' in current directory.
 
     Maybe this implementation can be optimized into a faster way.
+
+    Attributes:
+        root [str]: the root directory of the modelnet40 dataset
+        npoints [int]: the number of points sampled from the original point cloud randomly
+        normalize [bool]: normalize the point cloud into a sphere whose radius is 1
+        data_autmentation [bool]: random ratate and random jitter the point cloud
+        normal [bool]: need to get the normals or not
     """
     def __init__(self, root, npoints=1024, split='train', normalize=True, data_augmentation=True, normal=False):
         self.root = root
