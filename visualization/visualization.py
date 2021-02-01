@@ -2,11 +2,14 @@
 Visualization for point cloud using matploblib.
 """
 import random
+import sys
+
 import numpy as np
 import matplotlib.pyplot as plt 
 from mpl_toolkits.mplot3d import Axes3D
 
-from dataloaders.shapenet_part_loader import PartDataset
+sys.path.append(".")
+from dataset.shapenet import ShapeNetPartDataset
 
 
 def show_point_cloud_part(point_cloud, seg, axis=False):
@@ -17,11 +20,11 @@ def show_point_cloud_part(point_cloud, seg, axis=False):
         seg (np.ndarray): the label of every point corresponding to the point cloud
         axis (bool, optional): Hid the coordinate of the matplotlib. Defaults to False
     """
-    colors = ['red', 'green', 'blue', 'yellow']
-    parts = len(np.unique(seg))
+    colors = ['red', 'green', 'blue', 'yellow', 'pink', 'cyan']
+    parts = np.unique(seg)
     ax = plt.figure().add_subplot(projection='3d')
     ax._axis3don = axis
-    for i in range(parts):
+    for i in parts:
         index = (seg == i)
         ax.scatter(xs=point_cloud[index, 0], ys=point_cloud[index, 1], zs=point_cloud[index, 2], c=colors[i])
     plt.show()
@@ -41,12 +44,11 @@ def show_point_cloud(point_cloud, axis=False):
 
 
 if __name__ == '__main__':
-    train_dataset = PartDataset(npoints=4096, classification=False)
+    dataset_path = "/home/rico/Workspace/Dataset/shapenet_part/shapenetcore_partanno_segmentation_benchmark_v0"
+    train_dataset = ShapeNetPartDataset(root=dataset_path, npoints=4096, classification=False)
     num = len(train_dataset)
-    point_cloud, seg, cls = train_dataset[random.randint(0, num)]
-    for k, v in train_dataset.classes.items():
-        if cls == v:
-            print(k)
+    point_cloud, seg = train_dataset[random.randint(0, num)]
+    print(seg.unique())
 
     show_point_cloud_part(point_cloud, seg)
     show_point_cloud(point_cloud)
