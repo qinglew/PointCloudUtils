@@ -9,3 +9,4 @@ This directory includes many dataset classes for point cloud datasets. Because o
 ## ModelNet
 
 * modelnet40_ply_hdf5_2048.zip
+* modelnet40_hdf5_2048.zip

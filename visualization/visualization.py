@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 sys.path.append(".")
-from dataset.shapenet import ShapeNetPartDataset
+from datasets.shapenet import ShapeNetPartDataset
 
 
 def show_point_cloud_part(point_cloud, seg, axis=False):
